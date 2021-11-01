@@ -7,8 +7,8 @@ using namespace algebre;
 int main()
 {
     Matrice m1(2, 2);
-    Matrice m2(2, 2);
-    
+    Matrice m2(2,2);
+    Matrice* m3;
     m1.remplissage(5);
     m2.remplissage(10);
    (m1+m2).print();

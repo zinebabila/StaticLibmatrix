@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 using namespace algebre;
-algebre::Matrice::Matrice(int c, int l)
+algebre::Matrice::Matrice(unsigned int c, unsigned int l)
 {
     this->col = c;
     this->ligne = l;
@@ -16,7 +16,6 @@ algebre::Matrice::Matrice(int c, int l)
     }
    
 }
-
 void algebre::Matrice::remplissage(int val)
 {
     for (int i = 0; i < this->ligne; i++) {
@@ -27,7 +26,6 @@ void algebre::Matrice::remplissage(int val)
        
     }
 }
-
 Matrice & algebre::Matrice::operator+(const Matrice& c) const
 {
     Matrice* matri = new Matrice(this->col, this->ligne);
@@ -42,7 +40,6 @@ Matrice & algebre::Matrice::operator+(const Matrice& c) const
     return *matri;
     
 }
-
 Matrice & algebre::Matrice::operator-(const Matrice& c) const
 {
     Matrice* matri = new Matrice(this->col, this->ligne);
@@ -57,27 +54,30 @@ Matrice & algebre::Matrice::operator-(const Matrice& c) const
     }
     return *matri;
 }
-
 Matrice& algebre::Matrice::operator*(const Matrice& c) const
 {
     Matrice* matri = new Matrice(c.col, this->ligne);
-    
+    int sum;
     if (this->col == c.ligne && this->ligne == c.col) {
-      
+
         for (int i = 0; i < this->ligne; i++) {
+
             for (int j = 0; j < this->col; j++) {
-                for(int k=0;k<c.col;k++)
-                matri->Matrix[i][j] = this->Matrix[i][k] * c.Matrix[k][j];
+                sum = 0;
+                for (int k = 0; k < this->col; k++) {
+                    sum += this->Matrix[i][k] * c.Matrix[k][j];
+
+                }
+                matri->Matrix[i][j] = sum;
 
             }
 
+
         }
-       
-   }
+    }
     return *matri;
     
 }
-
 void algebre::Matrice::print() const
 {
     for (int i = 0; i < this->ligne; i++) {
@@ -88,18 +88,19 @@ void algebre::Matrice::print() const
         cout << endl;
     }
 }
-
 algebre::Matrice::~Matrice()
 {
+    //new==>delete
+    //new[]==>delete[]
     if (this->Matrix != nullptr) {
         for (int i = 0; i < this->ligne; i++) {
             if (this->Matrix[i] != nullptr) {
 
-                delete this->Matrix[i];
+                delete [] this->Matrix[i];
                 this->Matrix[i] = nullptr;
             }
         }
-        delete this->Matrix;
+        delete[] this->Matrix;
         this->Matrix = nullptr;
     }
     

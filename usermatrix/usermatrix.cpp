@@ -6,14 +6,17 @@
 using namespace algebre;
 int main()
 {
-    Matrice m1(2, 2);
-    Matrice m2(2,2);
-    Matrice* m3;
-    m1.remplissage(5);
-    m2.remplissage(10);
-   (m1+m2).print();
-   (m1 - m2).print();
-   (m1 * m2).print();
+    Matrice<double> m1(2, 2);
+   
+    m1.remplissage(2);
+     m1.print();
+     Matrice<int> m2(2, 2);
+     m2.remplissage(7);
+   m2.print();
+   Matrice<string> m3(2, 2);
+   m3.remplissage("zineb");
+   m3.print();
+  
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
